@@ -4,5 +4,9 @@ class UsersController < ApplicationController
     def create
 
     end
-    
+
+    # keep user signed in
+    def show
+
+    end
 end
