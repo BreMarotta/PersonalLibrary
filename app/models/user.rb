@@ -3,4 +3,6 @@ class User < ApplicationRecord
     
     has_many :books, dependent: :destroy
     has_many :groups, through: :books
+
+    validates :username, uniqueness: true, presence: true 
 end
