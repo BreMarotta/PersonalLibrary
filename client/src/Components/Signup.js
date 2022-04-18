@@ -14,26 +14,25 @@ const Signup = () => {
             method: 'POST',
             headers: { "Content-Type": 'application/json'},
             body: JSON.stringify({
-                username: username,
-                password: password,
+                username,
+                password,
                 password_confirmation: passwordConfirmation
             })
         })
-        .then(res => res.json())
-        .then(user => {
-            console.log(user)
-            // if (!user.errors) {
-            //     signup(user)
-            //     // history.push('/')
-            // } else {
-            //     setUsername("")
-            //     setPassword("")
-            //     setPasswordConfirmation("")
-            //     const errorLis = user.errors.map(x => <li>{x}</li>)
-            //     setErrorsList(errorLis)
-            // }
+        .then(res => {
+            if(res.ok) {
+                res.json()
+                .then(user => {
+                signup(user)
+                })
+            } else {
+                res.json()
+                .then((err) => setErrorsList(err.errors));
+            }            
         })
     }
+
+    const errorsLis = errorsList.map(x => <li>{x}</li>)
   return (
     <div>
         <form onSubmit={handleSubmit}>
@@ -61,7 +60,7 @@ const Signup = () => {
                 <input type="submit"/>
         </form>
         <ul>
-            {errorsList}
+            {errorsLis}
         </ul>
     </div>
   )

@@ -19,10 +19,11 @@ const UserProvider = ({children}) => {
     }
 
     const logout = () => {
+        alert("Hello from Context")
     }
 
-    const signup = () => {
- 
+    const signup = (user) => {
+        setUser(user)
     }
   return (
     <UserContext.Provider value= {{
